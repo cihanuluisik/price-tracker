@@ -1,0 +1,136 @@
+# Unified User Messages (Batch 1)
+# Extracted from chats/price-tracker-chats3.md
+
+================================================================================
+User Message 1 (line 5):
+Write me a "go" back end service.
+
+The back end service will have those below :
+
+Some crypto symbols will be given in a yaml config file to listen to.
+Back end will start listening to the WebSocket stream from that binance page.
+https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams
+
+We need to subscribe to <symbol>@trade stream only. For now you can ignore other event types.
+
+The backend will generate OHLC (Open, High, Low, Close) from the incoming prices. While doing this, it will save the OHLC data it produces in different periods like 1 minute, 2 minutes, 5 minutes, and 10 minutes into SQLite. It will respond with list of candle sticks created from the trades in the last hour only, from to requests the interface for a specific symbol and period. Be careful about the time zone differences coming from the stream. You need to pick the last hour done with the latest trade in database.For now only write the back end service. 
+Do not write any tests. I will give extra instructions to mock the stream with wire mock or  a test container later.
+
+================================================================================
+User Message 2 (line 1101):
+now write some test code to test the whole app from outside with http calls.. I dont want any unit test.
+Only e2e tests
+
+================================================================================
+User Message 3 (line 2822):
+explain these lines
+
+================================================================================
+User Message 4 (line 2851):
+these lines above
+
+================================================================================
+User Message 5 (line 3343):
+Write me a React JS UI now for the  "go" back end service above  in "ui" folder.Keep all ui and backend service space completely separate.  UI will be a js/react project. Back end is already in "go". When you are generating UI code take "ui" folder as base
+
+UI : 
+The UI will be with React JS using ES8 javascript version or any latest stable one.
+
+On UI, the landing page there will be some buttons or menus to open  live trades page which is detailed below. All the pages listed below will be a new closable popup page. I should be able to close and reopen another one from the landing page. 
+
+First page will be Live Trades page and  we should be able to see realtime trades.
+
+On the table on UI, there need to be those columns :  symbol, price,  quantity, time
+
+The table will be fed with  realtime trades for all symbols through web socket connection on UI.
+
+The connected backend will be sending those data through web socket connection.
+
+The second page, will be  Price Charts page.
+
+There will be a candlestick chart component for prices on that page. After the page is opened, it will fetch data from the backend for the selected symbol,  date range and specified period (1m, 2m, 5m, 10m) and generate the chart.
+
+================================================================================
+User Message 6 (line 3376):
+dont us type script in UI .. do with React JS using ES8 javascript or more latest stable version as requested
+
+================================================================================
+User Message 7 (line 5252):
+UI works well .. but server was not up.. write me a script in project root to start backend first then ui
+
+================================================================================
+User Message 8 (line 5485):
+UI and server worked separately but live trades did not come.. can u check the if backend websocket serving is ok 
+
+================================================================================
+User Message 9 (line 5925):
+when calling price chart page I got that error
+
+Uncaught runtime errors:
+×
+ERROR
+Object is disposed
+    at DevicePixelContentBoxBinding.get (http://localhost:3000/static/js/bundle.js:7522:15)
+    at PriceAxisStub._internal_destroy (http://localhost:3000/static/js/bundle.js:18924:48)
+    at TimeAxisWidget._internal_destroy (http://localhost:3000/static/js/bundle.js:19075:32)
+    at ChartWidget._internal_destroy (http://localhost:3000/static/js/bundle.js:19509:50)
+    at ChartApi.remove (http://localhost:3000/static/js/bundle.js:21339:32)
+    at initializeChart (http://localhost:3000/static/js/bundle.js:56266:24)
+    at http://localhost:3000/static/js/bundle.js:56253:7
+    at commitHookEffectListMount (http://localhost:3000/static/js/bundle.js:41619:30)
+    at invokePassiveEffectMountInDEV (http://localhost:3000/static/js/bundle.js:43308:17)
+    at invokeEffectsInDev (http://localhost:3000/static/js/bundle.js:45205:15)
+ERROR
+Object is disposed
+    at DevicePixelContentBoxBinding.get (http://localhost:3000/static/js/bundle.js:7522:15)
+    at PriceAxisStub._internal_destroy (http://localhost:3000/static/js/bundle.js:18924:48)
+    at TimeAxisWidget._internal_destroy (http://localhost:3000/static/js/bundle.js:19075:32)
+    at ChartWidget._internal_destroy (http://localhost:3000/static/js/bundle.js:19509:50)
+    at ChartApi.remove (http://localhost:3000/static/js/bundle.js:21339:32)
+    at initializeChart (http://localhost:3000/static/js/bundle.js:56266:24)
+    at http://localhost:3000/static/js/bundle.js:56253:7
+    at commitHookEffectListMount (http://localhost:3000/static/js/bundle.js:41619:30)
+    at invokePassiveEffectMountInDEV (http://localhost:3000/static/js/bundle.js:43308:17)
+    at invokeEffectsInDev (http://localhost:3000/static/js/bundle.js:45205:15)
+
+================================================================================
+User Message 10 (line 6369):
+the app is running but price charts' not displaying anyting
+
+================================================================================
+User Message 11 (line 6462):
+I see ❌ Failed to load chart data. Please try again. message on ui
+
+================================================================================
+User Message 12 (line 6578):
+yes do
+
+================================================================================
+User Message 13 (line 6600):
+On LiveTradePage the table blinks and shakes a lot due to frequent updates .. please make sure only the  cells updated without rendering whole table again 
+
+================================================================================
+User Message 14 (line 2933):
+move tests and its sh file to a more proper place other than root 
+
+================================================================================
+User Message 15 (line 6579):
+yes do 
+
+================================================================================
+User Message 16 (line 5):
+Write me a React JS UI and "go" back end service.
+
+The back end service will have those below :
+
+After retrieving which symbols to listen to and the URL to connect to from the YAML configuration file, it will start listening to the WebSocket stream.
+https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams
+
+We need to subscribe to <symbol>@trade stream only. For now you can ignore other event types.
+
+The backend will generate OHLC (Open, High, Low, Close) from the incoming prices. While doing this, it will save the OHLC data it produces in different periods like 1 minute, 2 minutes, 5 minutes, and 10 minutes into SQLite. It will respond with list of candle sticks created from the trades in the last hour only, from to requests the interface for a specific symbol and period. Be careful about the time zone differences coming from the stream. You need to pick the last hour done with the latest trade in database.For now only write the back end service. 
+Do not write any tests. I will give extra instructions to mock the stream with wire mock or  a test container later.
+
+================================================================================
+User Message 17 (line 91):
+On Live Trades pages the table is frequently updated and that causes blinks and shakes.. 

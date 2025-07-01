@@ -1,0 +1,102 @@
+Write me a “go” back end service.
+
+The back end service will have those below :
+
+
+Some crypto symbols will be given in a yaml config file to listen to.
+Back end will start listening to the WebSocket stream from that binance page.
+https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams
+
+We need to subscribe to <symbol>@trade stream only. For now you can ignore other event types.
+
+The backend will generate OHLC (Open, High, Low, Close) from the incoming prices. While doing this, it will save the OHLC data it produces in different periods like 1 minute, 2 minutes, 5 minutes, and 10 minutes into SQLite. It will respond with list of candle sticks created from the trades in the last hour only, from to requests the interface for a specific symbol and period. Be careful about the time zone differences coming from the stream. You need to pick the last hour done with the latest trade in database.For now only write the back end service. 
+Do not write any tests. I will give extra instructions to mock the stream with wire mock or  a test container later.
+
+now write some test code to test the whole app from outside with http calls.. I dont want any unit test.
+Only e2e tests
+
+explain these lines
+
+these lines above
+
+move tests and its sh file to a more proper place other than root
+
+Write me a React JS UI now for the  “go” back end service above  in “ui” folder.Keep all ui and backend service space completely separate.  UI will be a js/react project. Back end is already in “go”. When you are generating UI code take “ui” folder as base
+
+UI : 
+The UI will be with React JS using ES8 javascript version or any latest stable one.
+
+On UI, the landing page there will be some buttons or menus to open  live trades page which is detailed below. All the pages listed below will be a new closable popup page. I should be able to close and reopen another one from the landing page. 
+
+First page will be Live Trades page and  we should be able to see realtime trades.
+
+On the table on UI, there need to be those columns :  symbol, price,  quantity, time
+
+The table will be fed with  realtime trades for all symbols through web socket connection on UI.
+
+The connected backend will be sending those data through web socket connection.
+
+
+The second page, will be  Price Charts page.
+
+There will be a candlestick chart component for prices on that page. After the page is opened, it will fetch data from the backend for the selected symbol,  date range and specified period (1m, 2m, 5m, 10m) and generate the chart.
+
+dont us type script in UI .. do with React JS using ES8 javascript or more latest stable version as requested
+
+UI works well .. but server was not up.. write me a script in project root to start backend first then ui
+
+UI and server worked separately but live trades did not come.. can u check the if backend websocket serving is ok
+
+when calling price chart page I got that error
+
+Uncaught runtime errors:
+×
+ERROR
+Object is disposed
+    at DevicePixelContentBoxBinding.get (http://localhost:3000/static/js/bundle.js:7522:15)
+    at PriceAxisStub._internal_destroy (http://localhost:3000/static/js/bundle.js:18924:48)
+    at TimeAxisWidget._internal_destroy (http://localhost:3000/static/js/bundle.js:19075:32)
+    at ChartWidget._internal_destroy (http://localhost:3000/static/js/bundle.js:19509:50)
+    at ChartApi.remove (http://localhost:3000/static/js/bundle.js:21339:32)
+    at initializeChart (http://localhost:3000/static/js/bundle.js:56266:24)
+    at http://localhost:3000/static/js/bundle.js:56253:7
+    at commitHookEffectListMount (http://localhost:3000/static/js/bundle.js:41619:30)
+    at invokePassiveEffectMountInDEV (http://localhost:3000/static/js/bundle.js:43308:17)
+    at invokeEffectsInDev (http://localhost:3000/static/js/bundle.js:45205:15)
+ERROR
+Object is disposed
+    at DevicePixelContentBoxBinding.get (http://localhost:3000/static/js/bundle.js:7522:15)
+    at PriceAxisStub._internal_destroy (http://localhost:3000/static/js/bundle.js:18924:48)
+    at TimeAxisWidget._internal_destroy (http://localhost:3000/static/js/bundle.js:19075:32)
+    at ChartWidget._internal_destroy (http://localhost:3000/static/js/bundle.js:19509:50)
+    at ChartApi.remove (http://localhost:3000/static/js/bundle.js:21339:32)
+    at initializeChart (http://localhost:3000/static/js/bundle.js:56266:24)
+    at http://localhost:3000/static/js/bundle.js:56253:7
+    at commitHookEffectListMount (http://localhost:3000/static/js/bundle.js:41619:30)
+    at invokePassiveEffectMountInDEV (http://localhost:3000/static/js/bundle.js:43308:17)
+    at invokeEffectsInDev (http://localhost:3000/static/js/bundle.js:45205:15)
+
+the app is running but price charts' not displaying anyting
+
+I see ❌ Failed to load chart data. Please try again. message on ui
+
+On LiveTradePage the table blinks and shakes a lot due to frequent updates .. please make sure only the  cells updated without rendering whole table again
+
+oh start.sh script's no running proper now
+
+ok change go code as soon as the app starts it should start recording all coming trade data and make candle stick generation dynamic from those saved trades
+
+now change candle bar generation to use the trades table to generate on the fly
+
+now add 10 seconds, 30 seconds to ohlc_periods in yaml and ui. Change the candle bar generation code to accommodate
+
+hold on in ohlc periods u need to define the second and minute .. so 10s, 30s, 1m, 2m, 5m .. like
+
+yes
+
+make 10s default and remove 10m from config
+
+update gitignore with go and node modules etc all
+
+now I need to zip this project excluding all git ignored files and folders of course
+
