@@ -1,0 +1,21 @@
+Write me a “go” back end service.
+
+The back end service will have those below :
+
+Some crypto symbols will be given in a yaml config file to listen to.  
+
+Back end will start listening to the WebSocket stream from that binance page.
+
+@https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams
+
+We need to subscribe to <symbol>@trade stream only. For now you can ignore other event types.
+
+Write the trades to a table in sqlite locally.
+
+The backend will generate OHLC (Open, High, Low, Close) from the incoming prices. While doing this, it will save the OHLC data it produces in different periods like 1 minute, 2 minutes, 5 minutes, and 10 minutes into SQLite. It will respond with list of candle sticks created from the trades in the last hour only, from to requests the interface for a specific symbol and period. Be careful about the time zone differences coming from the stream. You need to pick the last hour done with the latest trade in database.For now only write the back end service. 
+
+The UI to be build later will have a trade view page which will have web socket connection to fetch the trades online.
+
+Also it will have a price chart page where candle bars created above will be shown in a chart. It will read the candle sticks from and end point
+Given the crypto symbol and period which will those options :  10 sec, 30 secs, 1 min, 2, min, 5 min.
+
